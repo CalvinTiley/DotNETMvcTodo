@@ -1,0 +1,134 @@
+html {
+    --color-primary: #e66e28;
+    --color-primary--hover: #c3591b;
+    font-size: 62.5%;
+}
+
+body {
+    position: relative;
+    height: 100vh;
+    height: 100dvh;
+    background-color: #111;
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+main {
+    position: absolute;
+    inset: 50%;
+    transform: translate(-50%, -50%);
+    height: min-content;
+    width: 100%;
+    max-width: 60rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: #444;
+    max-height: 80dvh;
+    overflow-y: auto;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, li {
+    margin: 0;
+}
+
+a, button {
+    padding: 0.5rem 2rem;
+    border: solid 0.2rem transparent;
+    border-radius: 1rem;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+a:hover, button:hover {
+    background-color: var(--color-primary--hover);
+    color: white;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    background-color: #111;
+}
+
+th, td {
+    padding: 1rem 2rem;
+    border: solid 0.1rem #aaa;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #222;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #333;
+}
+
+th {
+    white-space: nowrap;
+}
+
+td:first-child {
+    font-weight: bold;
+}
+
+td:nth-child(2) {
+    width: 100%;
+}
+
+td:nth-child(3) {
+    font-weight: bold;
+}
+
+td:last-child div {
+    display: grid;
+    gap: 1rem;
+}
+
+td:last-child button {
+    border: solid 0.2rem var(--color-primary);
+}
+
+td:last-child button:hover {
+    background-color: var(--color-primary);
+}
+
+.form-group {
+    display: grid;
+}
+
+.form-group:not(:first-child) {
+    margin-top: 2rem;
+}
+
+button[type="submit"] {
+    display: block;
+    margin-top: 2rem;
+    margin-left: auto;
+}
+
+input {
+    padding: 0.5rem 1rem;
+}
+
+dl {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0;
+}
+
+dt, dd {
+    margin: 0;
+    padding: 1rem 0;
+    border-bottom: solid 0.1rem white;
+}

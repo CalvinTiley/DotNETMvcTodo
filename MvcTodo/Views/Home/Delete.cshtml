@@ -1,0 +1,28 @@
+﻿@model MvcTodo.Models.Task;
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<header>
+    <h1>Delete Task</h1>
+
+    <a asp-action="Index">Back to tasks</a>
+</header>
+
+<dl>
+    <dt>@Html.DisplayNameFor(model => model.Title)</dt>
+    <dd>@Html.DisplayFor(model => model.Title)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.Description)</dt>
+    <dd>@Html.DisplayFor(model => model.Description)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.CreatedDate)</dt>
+    <dd>@Html.DisplayFor(model => model.CreatedDate)</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit">Delete</button>
+</form>

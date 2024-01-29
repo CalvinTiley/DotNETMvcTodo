@@ -1,0 +1,41 @@
+﻿@model MvcTodo.Models.Task;
+
+@{
+    ViewData["Title"] = "Create Task";
+}
+
+<header>
+    <h1>Create Task</h1>
+
+    <a asp-action="Index">Back to tasks</a>
+</header>
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" />
+        <span asp-validation-for="Description" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreatedDate"></label>
+        <input asp-for="CreatedDate" />
+        <span asp-validation-for="CreatedDate" />
+    </div>
+
+    <button type="submit">Create</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
