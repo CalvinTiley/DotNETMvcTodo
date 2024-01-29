@@ -8,6 +8,6 @@ This is a simple MVC todo app built with ASP.NET, Entity Framework and Microsoft
 
 -   Clone the repository
 -   Ensure to install `Microsoft.EntityFrameworkCore`, `Microsoft.EntityFrameworkCore.SqlServer` and `Microsoft.EntityFrameworkCore.Tools`
--	Create a database with the name MvcTodoContext with Sql Server Object Explorer
+-   Create a database with the name MvcTodoContext with Sql Server Object Explorer
 -   Run `Update-Database`
 -   Start the project
