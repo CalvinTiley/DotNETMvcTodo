@@ -1,22 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MvcTodo.Data;
-using MvcTodo.Models;
+using MvcTodo.Services;
 
 namespace MvcTodo.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly MvcTodoContext _context;
+        private readonly ITodoService _service;
 
-        public HomeController(MvcTodoContext context)
+        public HomeController(ITodoService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Task.ToListAsync());
+            return View(await _service.GetTodos());
         }
 
         public IActionResult Create()
@@ -24,14 +23,9 @@ namespace MvcTodo.Controllers
             return View();
         }
         
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var task = await _context.Task.FindAsync(id);
+            var task = await _service.FindTodo(id);
 
             if (task == null)
             {
@@ -53,12 +47,11 @@ namespace MvcTodo.Controllers
             {
                 try
                 {
-                    _context.Update(task);
-                    await _context.SaveChangesAsync();
+                    _service.EditTodo(task);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TaskExists(task.Id))
+                    if (!_service.TodoExists(task.Id))
                     {
                         return NotFound();
                     }
@@ -80,22 +73,16 @@ namespace MvcTodo.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(task);
-                await _context.SaveChangesAsync();
+                await _service.CreateTodo(task);
                 return RedirectToAction(nameof(Index));
             }
 
             return View(task);
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var task = await _context.Task.FirstOrDefaultAsync(m => m.Id == id);
+            var task = await _service.FindTodoAsync(id);
 
             if (task == null)
             {
@@ -109,20 +96,9 @@ namespace MvcTodo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var task = await _context.Task.FindAsync(id);
-
-            if (task != null) {
-                _context.Remove(task);
-            }
-
-            await _context.SaveChangesAsync();
+            await _service.DeleteTodo(id);
 
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool TaskExists(int id)
-        {
-            return _context.Task.Any(e => e.Id == id);
         }
     }
 }
